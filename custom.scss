@@ -1,0 +1,104 @@
+/*-- scss:defaults --*/
+
+// Custom colors for SARMAAN II branding
+$primary: #0077B5;
+$secondary: #28a745;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+
+// Fonts
+$font-family-sans-serif: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-color: $primary;
+
+// Slide styling
+$presentation-font-size-root: 40px;
+$presentation-line-height: 1.6;
+
+/*-- scss:rules --*/
+
+// Custom slide backgrounds
+.reveal .slide-background {
+  background-size: cover;
+}
+
+// Callout boxes styling
+.callout {
+  border-left: 4px solid $primary;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: rgba(0, 119, 181, 0.1);
+  border-radius: 5px;
+}
+
+.callout-tip {
+  border-left-color: $success;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.callout-warning {
+  border-left-color: $warning;
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.callout-important {
+  border-left-color: $danger;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.callout-note {
+  border-left-color: $info;
+  background-color: rgba(23, 162, 184, 0.1);
+}
+
+// Incremental lists
+.reveal .slides section .incremental li {
+  margin-bottom: 0.5em;
+}
+
+// Tables
+.reveal table {
+  font-size: 0.8em;
+  margin: 1em auto;
+}
+
+.reveal table th {
+  background-color: $primary;
+  color: white;
+  padding: 0.5em;
+}
+
+.reveal table td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+// Code blocks
+.reveal pre code {
+  max-height: 500px;
+  font-size: 0.7em;
+}
+
+// Columns
+.columns {
+  display: flex;
+  gap: 2rem;
+}
+
+.column {
+  flex: 1;
+}
+
+// Custom emphasis
+.highlight {
+  background-color: yellow;
+  padding: 0.2em;
+}
+
+// Footer styling
+.reveal .footer {
+  font-size: 0.6em;
+  color: #666;
+}

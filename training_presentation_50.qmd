@@ -1,0 +1,634 @@
+---
+title: "Building SARMAAN II CES QC APP"
+subtitle: "Developer Training"
+author: "SARMAAN II Technical Team"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    footer: "Abdulrahaman A MUSA"
+---
+
+# Welcome {background-color="#0077B5"}
+
+**Learn to build Streamlit dashboard:**
+
+- Clone existing app from GitHub
+- Setup development environment
+- Understand authentication system
+- Work with multi-sheet Excel data
+- Implement QC checks
+
+**Duration:** 2 days
+
+---
+
+# Slide 1: Prerequisites
+
+**What you need:**
+
+1. **Computer** - Windows/Mac/Linux
+2. **Internet connection** - For downloads
+3. **GitHub account** - Create at github.com/signup
+4. **Basic programming knowledge** - Helpful but not required
+
+---
+
+# Slide 2: Install Python
+
+1. Download from python.org (3.11+)
+2. **Important:** Check "Add Python to PATH"
+3. Verify installation:
+
+```bash
+python --version
+```
+
+Expected: `Python 3.11.x` or `3.12.x`
+
+---
+
+# Slide 3: Install VS Code
+
+1. Download from code.visualstudio.com
+2. Install with default settings
+3. Add extensions (Ctrl+Shift+X):
+   - Python (Microsoft)
+   - Pylance (Microsoft)
+   - GitLens
+
+---
+
+# Slide 4: Install Git
+
+1. Download from git-scm.com
+2. Install with default settings
+3. Verify: `git --version`
+4. Configure your identity:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+---
+
+# Slide 5: Create GitHub Account
+
+**If you don't have one:**
+
+1. Go to github.com/signup
+2. Enter email and create password
+3. Choose username (e.g., sarmaan-yourname)
+4. Verify email
+5. Complete setup
+
+---
+
+# Slide 6: Clone App from GitHub
+
+**Get the existing dashboard code:**
+
+```bash
+# Navigate to your workspace
+cd Desktop
+
+# Clone the repository
+git clone https://github.com/YOUR_ORG/sarmaan-dashboard.git
+
+# Enter the project folder
+cd sarmaan-dashboard
+
+# Open in VS Code
+code .
+```
+
+Replace `YOUR_ORG` with actual organization name
+
+---
+
+# Slide 7: Understanding Project Structure
+
+**What you'll see after cloning:**
+
+```
+sarmaan-dashboard/
+├── app.py              # Main application
+├── requirements.txt    # Python packages
+├── .gitignore         # Files to ignore
+├── README.md          # Documentation
+└── .streamlit/        # Configuration folder
+```
+
+---
+
+# Slide 7: Understanding Project Structure
+
+**What you'll see after cloning:**
+
+```
+sarmaan-dashboard/
+├── app.py              # Main application
+├── requirements.txt    # Python packages
+├── .gitignore         # Files to ignore
+├── README.md          # Documentation
+└── .streamlit/        # Configuration folder
+```
+
+---
+
+# Slide 8: Setup Virtual Environment
+
+**Create isolated Python environment:**
+
+```bash
+# Create virtual environment
+python -m venv .venv
+
+# Activate (Windows)
+.venv\Scripts\Activate.ps1
+
+# Activate (Mac/Linux)
+source .venv/bin/activate
+```
+
+You'll see `(.venv)` in terminal when activated
+
+---
+
+# Slide 9: Install Dependencies
+
+**Install all required packages:**
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs:
+- streamlit
+- pandas
+- plotly
+- openpyxl
+- requests
+
+Wait 2-3 minutes for installation
+
+---
+
+# Slide 10: Test the App
+
+**Run the cloned app:**
+
+```bash
+streamlit run app.py
+```
+
+Browser opens at `http://localhost:8501`
+
+**Test login:**
+- Username: `admin` (see all data)
+- Username: `ingawa` (LGA-specific)
+
+---
+
+# Slide 11: Understanding Authentication
+
+```python
+LGA_CREDENTIALS = {
+    "admin": "Admin",
+    "ingawa": "Ingawa",
+    "kankara": "Kankara"
+}
+
+def check_login(username):
+    username_lower = username.lower()
+    if username_lower == "admin":
+        return 'admin', None
+    if username_lower in LGA_CREDENTIALS:
+        return 'lga', LGA_CREDENTIALS[username_lower]
+    return None, None
+```
+
+---
+
+# Slide 12: Login Page Code
+
+```python
+def login_page():
+    st.title("🔐 Login")
+    with st.form("login"):
+        username = st.text_input("Username")
+        submit = st.form_submit_button("Login")
+        if submit:
+            access, lga = check_login(username)
+            if access:
+                st.session_state['logged_in'] = True
+                st.session_state['access_level'] = access
+                st.session_state['lga_filter'] = lga
+                st.rerun()
+```
+
+---
+
+# Slide 13: Session State Management
+
+```python
+if 'logged_in' not in st.session_state:
+    st.session_state['logged_in'] = False
+
+if st.session_state['logged_in']:
+    run_dashboard()
+else:
+    login_page()
+```
+
+**Session state** remembers user data across reruns
+
+---
+
+# Slide 14: KoboToolbox API Connection
+
+```python
+import requests
+from io import BytesIO
+
+@st.cache_data(ttl=600)
+def load_data_from_kobo():
+    url = "YOUR_KOBO_URL"
+    response = requests.get(url, timeout=60)
+    excel_file = BytesIO(response.content)
+    df = pd.read_excel(excel_file, sheet_name=0)
+    return df
+```
+
+---
+
+# Slide 12: Multi-Sheet Loading
+
+```python
+def load_all_sheets():
+    response = requests.get(KOBO_URL, timeout=60)
+    excel_file = BytesIO(response.content)
+    sheets = {
+        'main': pd.read_excel(excel_file, sheet_name=0),
+        'child_info': pd.read_excel(excel_file, sheet_name='child_info'),
+        'child_infoo': pd.read_excel(excel_file, sheet_name='child_infoo'),
+        'net_repeat': pd.read_excel(excel_file, sheet_name='net_repeat')
+    }
+    return sheets
+```
+
+---
+
+# Slide 13: Sheet Relationships
+
+**Links:**
+
+- **Main:** `_uuid` (Primary Key)
+- **child_info:** `_submission__uuid` → main `_uuid`
+- **child_infoo:** `_submission__uuid` → main `_uuid`
+- **net_repeat:** `_submission__uuid` → main `_uuid`
+
+**Merge:**
+```python
+merged = main_df.merge(child_df, 
+    left_on='_uuid', right_on='_submission__uuid', how='left')
+```
+
+---
+
+# Slide 14: Data Cleaning
+
+```python
+def clean_text_columns(df):
+    cols = ['Q2. Local Government Area', 'Q3.Ward', 'Q4. Community Name']
+    for col in cols:
+        if col in df.columns:
+            df[col] = df[col].str.replace('�', '').str.strip()
+    return df
+```
+
+---
+
+# Slide 15: Metrics Display
+
+```python
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("Total Submissions", len(df))
+with col2:
+    st.metric("LGAs", df['LGA'].nunique())
+with col3:
+    st.metric("Approved", approved_count)
+with col4:
+    st.metric("Pending", pending_count)
+```
+
+---
+
+# Slide 16: Data Tables
+
+```python
+with st.sidebar:
+    lga_filter = st.selectbox("Select LGA", 
+        ['All'] + list(df['LGA'].unique()))
+
+if lga_filter != 'All':
+    df = df[df['LGA'] == lga_filter]
+
+st.dataframe(df)
+```
+
+---
+
+# Slide 17: QC Check 1 - Age
+
+```python
+def check_age_inconsistencies(df):
+    issues = []
+    age_problems = df[df['Years Living'] > df['HH Head Age']]
+    for idx, row in age_problems.iterrows():
+        issues.append({
+            'LGA': row['LGA'],
+            'Issue Type': 'Age Inconsistencies',
+            'Description': f"Years Living > Age"
+        })
+    return issues
+```
+
+---
+
+# Slide 18: QC Check 2 - Duplicates
+
+```python
+def check_duplicates(df):
+    issues = []
+    dups = df[df['unique_code'].duplicated(keep=False)]
+    for idx, row in dups.iterrows():
+        issues.append({
+            'LGA': row['LGA'],
+            'Issue Type': 'HH Duplicate',
+            'Description': f"Duplicate: {row['unique_code']}"
+        })
+    return issues
+```
+
+---
+
+# Slide 19: QC Check 3 - Child Age
+
+```python
+def check_child_age(child_df, main_df):
+    issues = []
+    problems = child_df[(child_df['Q94'] == 'Yes') & (child_df['Age'] > 59)]
+    for idx, row in problems.iterrows():
+        parent = main_df[main_df['_uuid'] == row['_submission__uuid']].iloc[0]
+        issues.append({
+            'LGA': parent['LGA'],
+            'Issue Type': 'Child Age >59',
+            'Description': f"Age: {row['Age']} months"
+        })
+    return issues
+```
+
+---
+
+# Slide 20: Complete QC Function
+
+```python
+def perform_qc_checks(sheets_dict):
+    all_issues = []
+    main_df = sheets_dict['main']
+    child_df = sheets_dict['child_infoo']
+    
+    all_issues.extend(check_age_inconsistencies(main_df))
+    all_issues.extend(check_duplicates(main_df))
+    all_issues.extend(check_child_age(child_df, main_df))
+    
+    return pd.DataFrame(all_issues)
+```
+
+---
+
+# Slide 21: Display QC Results
+
+```python
+qc_results = perform_qc_checks(sheets)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.metric("Total Issues", len(qc_results))
+with col2:
+    age_issues = len(qc_results[qc_results['Issue Type'] == 'Age Inconsistencies'])
+    st.metric("Age Issues", age_issues)
+
+st.dataframe(qc_results)
+```
+
+---
+
+# Slide 22: Custom CSS
+
+```python
+st.markdown("""
+<style>
+.metric-card {
+    background: linear-gradient(135deg, #0077B5, #00A0DC);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+@media (max-width: 768px) {
+    .metric-card { padding: 1rem; }
+}
+</style>
+""", unsafe_allow_html=True)
+```
+
+---
+
+# Slide 24: Role-Based Filtering
+
+```python
+if st.session_state.get('access_level') == 'lga':
+    user_lga = st.session_state['lga_filter']
+    df = df[df['LGA'].str.lower() == user_lga.lower()]
+    st.info(f"Data for: {user_lga}")
+elif st.session_state.get('access_level') == 'admin':
+    lga_filter = st.selectbox("LGA", ['All'] + list(df['LGA'].unique()))
+    if lga_filter != 'All':
+        df = df[df['LGA'] == lga_filter]
+```
+
+---
+
+# Slide 25: Community Mapping
+
+```python
+COMMUNITY_MAPPING = """
+LGA	Ward	Code	Name	Planned_HH
+Ingawa	Agayawa	80111	Mattallawa	30
+Ingawa	Agayawa	80112	Yallami	30
+"""
+
+COMMUNITY_DF = pd.read_csv(StringIO(COMMUNITY_MAPPING), sep='\t')
+```
+
+---
+
+# Slide 27: Coverage Calculation
+
+```python
+def calculate_coverage(df):
+    coverage = []
+    for code in df['Community Code'].unique():
+        planned = COMMUNITY_DF[COMMUNITY_DF['Code'] == code]['Planned_HH'].values[0]
+        reached = len(df[df['Community Code'] == code])
+        pct = (reached / planned * 100) if planned > 0 else 0
+        coverage.append({
+            'Code': code, 'Planned': planned, 'Reached': reached,
+            'Coverage %': pct, 'Status': '✅' if reached >= planned else '⚠️'
+        })
+    return pd.DataFrame(coverage)
+```
+
+---
+
+# Slide 28: Error Handling
+
+```python
+try:
+    df = load_data_from_kobo()
+    if df.empty:
+        st.warning("No data available")
+        st.stop()
+    df = clean_text_columns(df)
+except requests.exceptions.Timeout:
+    st.error("Connection timeout")
+except Exception as e:
+    st.error(f"Error: {e}")
+```
+
+---
+
+# Slide 29: Git Workflow
+
+```bash
+git status
+git add .
+git commit -m "Add QC checks"
+git push origin main
+```
+
+---
+
+# Slide 30: Push to GitHub
+
+**First time:**
+```bash
+git remote add origin https://github.com/USERNAME/repo.git
+git branch -M main
+git push -u origin main
+```
+
+---
+
+# Slide 31: Deploy to Cloud
+
+1. Go to share.streamlit.io
+2. Click "New app"
+3. Select GitHub repo
+4. Branch: `main`, File: `app.py`
+5. Add secrets
+6. Deploy!
+
+---
+
+# Slide 32: AI Prompt - Setup
+
+```text
+Create Streamlit app with authentication 
+using session state and login page.
+```
+
+---
+
+# Slide 35: AI Prompt - Data
+
+```text
+Load Excel with 4 sheets (main, child_info, 
+child_infoo, net_repeat) as dictionary.
+```
+
+---
+
+# Slide 36: AI Prompt - QC
+
+```text
+Check age inconsistencies where Years Living 
+> HH Head Age. Return issues list.
+```
+
+---
+
+# Slide 35: Code Structure
+
+```
+sarmaan_dashboard/
+├── app.py
+├── requirements.txt
+├── .gitignore
+├── .streamlit/
+│   └── secrets.toml
+└── README.md
+```
+
+---
+
+# Slide 36: Hands-On Exercise
+
+**Build in 60 min:**
+1. Project with venv
+2. Auth (2 users)
+3. Load Excel
+4. 3 metrics
+5. 1 filter
+6. 1 QC check
+7. CSS
+8. GitHub
+
+---
+
+# Slide 37: Troubleshooting
+
+**Data not loading:**
+- Check URL
+- Verify internet
+- Check sheet names
+
+**Login failing:**
+- Check username
+- Verify session_state
+
+---
+
+# Slide 38: Next Steps
+
+1. Complete project
+2. Deploy to cloud
+3. Add 10 QC checks
+4. Add all LGAs
+5. Test with real data
+
+---
+
+# Slide 39: Thank You! {background-color="#0077B5"}
+
+**You're Ready to Build! 🚀**
+
+- Start small, iterate
+- Use AI assistance
+- Test frequently
+- Ask for help
+
+
+**Happy Coding!** 💻✨
