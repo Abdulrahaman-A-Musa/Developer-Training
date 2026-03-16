@@ -98,6 +98,8 @@
   <link href="training_presentation_50_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="training_presentation_50_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="training_presentation_50_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="training_presentation_50_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="training_presentation_50_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="training_presentation_50_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -207,6 +209,7 @@ SARMAAN II Technical Team
 <section>
 <section id="welcome" class="title-slide slide level1 center" data-background-color="#0077B5">
 <h1>Welcome</h1>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 10px; color: #333;">
 <p><strong>Learn to build Streamlit dashboard:</strong></p>
 <ul>
 <li>Clone existing app from GitHub</li>
@@ -216,6 +219,7 @@ SARMAAN II Technical Team
 <li>Implement QC checks</li>
 </ul>
 <p><strong>Duration:</strong> 2 days</p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -223,6 +227,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-1-prerequisites" class="title-slide slide level1 center">
 <h1>Slide 1: Prerequisites</h1>
+<div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 5px solid #0077B5;">
 <p><strong>What you need:</strong></p>
 <ol type="1">
 <li><strong>Computer</strong> - Windows/Mac/Linux</li>
@@ -230,6 +235,7 @@ SARMAAN II Technical Team
 <li><strong>GitHub account</strong> - Create at github.com/signup</li>
 <li><strong>Basic programming knowledge</strong> - Helpful but not required</li>
 </ol>
+</div>
 </section>
 <section class="slide level2">
 
@@ -237,6 +243,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-2-install-python" class="title-slide slide level1 center">
 <h1>Slide 2: Install Python</h1>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <ol type="1">
 <li>Download from python.org (3.11+)</li>
 <li><strong>Important:</strong> Check “Add Python to PATH”</li>
@@ -244,6 +251,7 @@ SARMAAN II Technical Team
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Expected: <code>Python 3.11.x</code> or <code>3.12.x</code></p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -251,6 +259,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-3-install-vs-code" class="title-slide slide level1 center">
 <h1>Slide 3: Install VS Code</h1>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <ol type="1">
 <li>Download from code.visualstudio.com</li>
 <li>Install with default settings</li>
@@ -261,6 +270,7 @@ SARMAAN II Technical Team
 <li>GitLens</li>
 </ul></li>
 </ol>
+</div>
 </section>
 <section class="slide level2">
 
@@ -268,6 +278,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-4-install-git" class="title-slide slide level1 center">
 <h1>Slide 4: Install Git</h1>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <ol type="1">
 <li>Download from git-scm.com</li>
 <li>Install with default settings</li>
@@ -276,6 +287,7 @@ SARMAAN II Technical Team
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
 <span id="cb2-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your@email.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -283,6 +295,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-5-create-github-account" class="title-slide slide level1 center">
 <h1>Slide 5: Create GitHub Account</h1>
+<div style="background-color: #e8f4f8; padding: 12px; border-radius: 10px; border: 2px solid #0077B5;">
 <p><strong>If you don’t have one:</strong></p>
 <ol type="1">
 <li>Go to github.com/signup</li>
@@ -291,6 +304,7 @@ SARMAAN II Technical Team
 <li>Verify email</li>
 <li>Complete setup</li>
 </ol>
+</div>
 </section>
 <section class="slide level2">
 
@@ -303,7 +317,7 @@ SARMAAN II Technical Team
 <span id="cb3-2"><a href=""></a><span class="bu">cd</span> Desktop</span>
 <span id="cb3-3"><a href=""></a></span>
 <span id="cb3-4"><a href=""></a><span class="co"># Clone the repository</span></span>
-<span id="cb3-5"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_ORG/sarmaan-dashboard.git</span>
+<span id="cb3-5"><a href=""></a><span class="fu">git</span> clone https://github.com/Abdulrahaman-A-Musa/Adamawa-ces-qc-app.git</span>
 <span id="cb3-6"><a href=""></a></span>
 <span id="cb3-7"><a href=""></a><span class="co"># Enter the project folder</span></span>
 <span id="cb3-8"><a href=""></a><span class="bu">cd</span> sarmaan-dashboard</span>
@@ -374,10 +388,14 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-10-test-the-app" class="title-slide slide level1 center">
 <h1>Slide 10: Test the App</h1>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 <p><strong>Run the cloned app:</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Browser opens at <code>http://localhost:8501</code></p>
+</div>
+<div style="background-color: #d4edda; padding: 12px; border-radius: 8px; margin-top: 10px;">
 <p><strong>Test login:</strong> - Username: <code>admin</code> (see all data) - Username: <code>ingawa</code> (LGA-specific)</p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -385,6 +403,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-11-understanding-authentication" class="title-slide slide level1 center">
 <h1>Slide 11: Understanding Authentication</h1>
+<div style="font-size: 0.85em;">
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>LGA_CREDENTIALS <span class="op">=</span> {</span>
 <span id="cb9-2"><a href=""></a>    <span class="st">"admin"</span>: <span class="st">"Admin"</span>,</span>
 <span id="cb9-3"><a href=""></a>    <span class="st">"ingawa"</span>: <span class="st">"Ingawa"</span>,</span>
@@ -398,6 +417,7 @@ SARMAAN II Technical Team
 <span id="cb9-11"><a href=""></a>    <span class="cf">if</span> username_lower <span class="kw">in</span> LGA_CREDENTIALS:</span>
 <span id="cb9-12"><a href=""></a>        <span class="cf">return</span> <span class="st">'lga'</span>, LGA_CREDENTIALS[username_lower]</span>
 <span id="cb9-13"><a href=""></a>    <span class="cf">return</span> <span class="va">None</span>, <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -424,6 +444,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-13-session-state-management" class="title-slide slide level1 center">
 <h1>Slide 13: Session State Management</h1>
+<div style="background-color: #f8f9fa; padding: 15px; border-radius: 10px;">
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="cf">if</span> <span class="st">'logged_in'</span> <span class="kw">not</span> <span class="kw">in</span> st.session_state:</span>
 <span id="cb11-2"><a href=""></a>    st.session_state[<span class="st">'logged_in'</span>] <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb11-3"><a href=""></a></span>
@@ -431,7 +452,10 @@ SARMAAN II Technical Team
 <span id="cb11-5"><a href=""></a>    run_dashboard()</span>
 <span id="cb11-6"><a href=""></a><span class="cf">else</span>:</span>
 <span id="cb11-7"><a href=""></a>    login_page()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="background-color: #fff3cd; padding: 12px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #ffc107;">
 <p><strong>Session state</strong> remembers user data across reruns</p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -473,6 +497,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-13-sheet-relationships" class="title-slide slide level1 center">
 <h1>Slide 13: Sheet Relationships</h1>
+<div style="font-size: 0.9em;">
 <p><strong>Links:</strong></p>
 <ul>
 <li><strong>Main:</strong> <code>_uuid</code> (Primary Key)</li>
@@ -483,6 +508,7 @@ SARMAAN II Technical Team
 <p><strong>Merge:</strong></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>merged <span class="op">=</span> main_df.merge(child_df, </span>
 <span id="cb14-2"><a href=""></a>    left_on<span class="op">=</span><span class="st">'_uuid'</span>, right_on<span class="op">=</span><span class="st">'_submission__uuid'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -781,7 +807,19 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-36-hands-on-exercise" class="title-slide slide level1 center">
 <h1>Slide 36: Hands-On Exercise</h1>
-<p><strong>Build in 60 min:</strong> 1. Project with venv 2. Auth (2 users) 3. Load Excel 4. 3 metrics 5. 1 filter 6. 1 QC check 7. CSS 8. GitHub</p>
+<div style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); border-top: 4px solid #0077B5;">
+<p><strong>Build in 60 min:</strong></p>
+<ol type="1">
+<li>Project with venv</li>
+<li>Auth (2 users)</li>
+<li>Load Excel</li>
+<li>3 metrics</li>
+<li>1 filter</li>
+<li>1 QC check</li>
+<li>CSS</li>
+<li>GitHub</li>
+</ol>
+</div>
 </section>
 <section class="slide level2">
 
@@ -789,8 +827,12 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-37-troubleshooting" class="title-slide slide level1 center">
 <h1>Slide 37: Troubleshooting</h1>
+<div style="background-color: #fff3cd; padding: 15px; border-radius: 10px; border-left: 5px solid #ffc107;">
 <p><strong>Data not loading:</strong> - Check URL - Verify internet - Check sheet names</p>
+</div>
+<div style="background-color: #f8d7da; padding: 15px; border-radius: 10px; border-left: 5px solid #dc3545; margin-top: 10px;">
 <p><strong>Login failing:</strong> - Check username - Verify session_state</p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -798,6 +840,7 @@ SARMAAN II Technical Team
 <section>
 <section id="slide-38-next-steps" class="title-slide slide level1 center">
 <h1>Slide 38: Next Steps</h1>
+<div style="background-color: white; padding: 18px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
 <ol type="1">
 <li>Complete project</li>
 <li>Deploy to cloud</li>
@@ -805,20 +848,20 @@ SARMAAN II Technical Team
 <li>Add all LGAs</li>
 <li>Test with real data</li>
 </ol>
+</div>
 </section>
 <section class="slide level2">
 
 </section></section>
 <section id="slide-39-thank-you" class="title-slide slide level1 center" data-background-color="#0077B5">
 <h1>Slide 39: Thank You!</h1>
+<div style="background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.2); text-align: center; color: #333;">
 <p><strong>You’re Ready to Build! 🚀</strong></p>
-<ul>
-<li>Start small, iterate</li>
-<li>Use AI assistance</li>
-<li>Test frequently</li>
-<li>Ask for help</li>
-</ul>
+<p>Start small, iterate<br>
+Test frequently<br>
+Ask for help</p>
 <p><strong>Happy Coding!</strong> 💻✨</p>
+</div>
 
 </section>
     </div>
@@ -835,6 +878,7 @@ SARMAAN II Technical Team
   <script src="training_presentation_50_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="training_presentation_50_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="training_presentation_50_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="training_presentation_50_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="training_presentation_50_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -856,7 +900,8 @@ SARMAAN II Technical Team
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true,"theme":"chalkboard"},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1027,7 +1072,7 @@ SARMAAN II Technical Team
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1221,6 +1266,4 @@ SARMAAN II Technical Team
       }
     });
     </script>
-    
-
 </body></html>
